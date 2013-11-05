@@ -12,12 +12,15 @@ struct sbuff {
 	size_t len, cap;
 };
 
-static void *sbuff_init (sbuff *s, size_t cap);
+static void *sbuff_init(sbuff *s, size_t cap);
 static void *sbuff_push(sbuff *s, char c);
 static void *sbuff_xchg(sbuff *s, char c);
-# define sbuff_free(s) (free((s)->p))
-# define sbuff_head(s) (((s)->len) ? *((s)->p + (s)->len - 1): -1)
-static void sbuff_reset(sbuff *s);
+static void  sbuff_reset(sbuff *s);
+
+# define     sbuff_free(s) \
+	(free((s)->p))
+# define     sbuff_head(s) \
+	(((s)->len) ? *((s)->p + (s)->len - 1): -1)
 
 /**********************************************************************/
 
@@ -172,8 +175,8 @@ static void *sbuff_xchg (sbuff *s, char c) {
 }
 
 static void sbuff_reset (sbuff *s) {
+	memset(s->p, '\0', s->len);
 	s->len = 0;
-	memset(s->p, '\0', s->cap);
 }
 
 /**********************************************************************/
