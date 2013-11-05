@@ -170,7 +170,7 @@ static void *sbuff_xchg (sbuff *s, char c) {
 	if (!s->len) {
 		return NULL;
 	}
-	p = s->p + (s->len-1);
+	p = s->p + (s->len - 1);
 	*p = c;
 	return p;
 }
