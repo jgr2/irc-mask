@@ -165,13 +165,14 @@ static void *sbuff_push (sbuff *s, char c) {
 }
 
 static void *sbuff_xchg (sbuff *s, char c) {
+	char *p;
 
 	if (!s->len) {
 		return NULL;
 	}
-	
-	s->p[s->len-1] = c;
-	return s->p + s->len - 1;
+	p = s->p + (s->len-1);
+	*p = c;
+	return p;
 }
 
 static void sbuff_reset (sbuff *s) {
